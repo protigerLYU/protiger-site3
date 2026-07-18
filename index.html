@@ -1255,46 +1255,41 @@
   <div class="modal" id="modal"><button type="button" id="modalClose">关闭</button><img id="modalImg" alt="图片预览" /></div>
 
   <script>
-    const IMG_EXTS = ['jpg','jpeg','png','webp'];
-    const MAX_IMAGE_INDEX = 20;
     const folders = {
-      hero: 'images/hero/',
-      pumps: 'images/products/pumps/',
-      transmission: 'images/products/transmission/',
-      hydraulics: 'images/products/hydraulics/',
-      applications: 'images/applications/'
-    };
+  hero: 'images/hero/',
+  pumps: 'images/products/pumps/',
+  transmission: 'images/products/transmission/',
+  hydraulics: 'images/products/hydraulics/',
+  applications: 'images/applications/'
+};
 
-    function pad(n){ return String(n).padStart(2,'0'); }
+/*
+  填写每个文件夹实际存在的图片数量
+  例如 pumps 文件夹有01.jpg至04.jpg
+  就填写 pumps: 4
+*/
+const IMAGE_COUNT = {
+  hero: 4,
+  pumps: 4,
+  transmission: 4,
+  hydraulics: 4,
+  applications: 4
+};
 
-    function tryLoadImage(base, index, extIndex, onFound, onMissingAll){
-      if(extIndex >= IMG_EXTS.length){ onMissingAll && onMissingAll(); return; }
-      const src = `${base}${pad(index)}.${IMG_EXTS[extIndex]}`;
-      const img = new Image();
-      img.onload = () => onFound(src);
-      img.onerror = () => tryLoadImage(base, index, extIndex + 1, onFound, onMissingAll);
-      img.src = src;
-    }
+function pad(n){
+  return String(n).padStart(2,'0');
+}
 
-    function collectImages(folderKey, callback){
-      const results = [];
-      let remaining = MAX_IMAGE_INDEX;
-      for(let i=1;i<=MAX_IMAGE_INDEX;i++){
-        tryLoadImage(folders[folderKey], i, 0, (src)=>{
-          results.push({index:i,src});
-          remaining--;
-          if(remaining === 0) done();
-        }, ()=>{
-          remaining--;
-          if(remaining === 0) done();
-        });
-      }
-      function done(){
-        results.sort((a,b)=>a.index-b.index);
-        callback(results.map(item=>item.src));
-      }
-    }
+function collectImages(folderKey, callback){
+  const count = IMAGE_COUNT[folderKey] || 0;
 
+  const images = Array.from(
+    { length: count },
+    (_, i) => `${folders[folderKey]}${pad(i + 1)}.jpg`
+  );
+
+  callback(images);
+}
     function openModal(src){
       const modal = document.getElementById('modal');
       const img = document.getElementById('modalImg');
@@ -1311,10 +1306,18 @@
         if(!imgs.length) return;
         box.innerHTML = '';
         imgs.forEach((src,i)=>{
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = `VIZK 锂电化成工序展示图 ${i+1}`;
-          if(i===0) img.classList.add('active');
+         const img = document.createElement('img');
+img.src = src;
+img.alt = `VIZK 锂电化成工序展示图 ${i+1}`;
+img.decoding = 'async';
+
+if(i === 0){
+  img.loading = 'eager';
+  img.fetchPriority = 'high';
+  img.classList.add('active');
+}else{
+  img.loading = 'lazy';
+}
           img.addEventListener('click',()=>openModal(src));
           box.appendChild(img);
         });
@@ -1328,7 +1331,14 @@
         }, 4200);
       });
     }
+const loadedGalleries = new Set();
 
+function ensureProductGallery(key){
+  if(loadedGalleries.has(key)) return;
+
+  loadedGalleries.add(key);
+  initProductGallery(key);
+}
     function initProductGallery(key){
       const ledger = document.querySelector(`[data-gallery="${key}"]`);
       const strip = document.querySelector(`[data-strip="${key}"]`);
@@ -1344,7 +1354,14 @@
           doubled.forEach((src)=>{
             const frame = document.createElement('div');
             frame.className = 'ledger-img';
-            frame.innerHTML = `<img src="${src}" alt="VIZK 化成工序备件产品图片">`;
+            frame.innerHTML = `
+  <img
+    src="${src}"
+    alt="VIZK 化成工序备件产品图片"
+    loading="lazy"
+    decoding="async"
+  >
+`;
             frame.addEventListener('click',()=>openModal(src));
             track.appendChild(frame);
           });
@@ -1356,7 +1373,14 @@
           doubled.forEach((src)=>{
             const frame = document.createElement('div');
             frame.className = 'film-frame';
-            frame.innerHTML = `<img src="${src}" alt="VIZK 化成工序备件产品图片">`;
+            frame.innerHTML = `
+  <img
+    src="${src}"
+    alt="VIZK 化成工序备件产品图片"
+    loading="lazy"
+    decoding="async"
+  >
+`;
             frame.addEventListener('click',()=>openModal(src));
             strip.appendChild(frame);
           });
@@ -1380,8 +1404,10 @@
           if(fallback) fallback.remove();
           imgs.forEach((src,i)=>{
             const img = document.createElement('img');
-            img.src = src;
-            img.alt = `VIZK 化成工序应用场景 ${i+1}`;
+img.src = src;
+img.alt = `VIZK 化成工序应用场景 ${i+1}`;
+img.loading = 'lazy';
+img.decoding = 'async';
             if(i===0) img.classList.add('active');
             img.addEventListener('click',()=>openModal(src));
             visual.insertBefore(img, visual.querySelector('.industry-caption'));
@@ -1411,6 +1437,7 @@
           document.querySelectorAll('.system-panel').forEach(p=>p.classList.remove('active'));
           btn.classList.add('active');
           document.getElementById(`panel-${tab}`).classList.add('active');
+          ensureProductGallery(tab);
         });
       });
     }
@@ -1442,13 +1469,15 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     initHero();
-    initProductGallery('pumps');
-    initProductGallery('transmission');
-    initProductGallery('hydraulics');
-    initApplications();
-    initTabs();
-    initReveal();
-    initCounters();
+
+/* 首页只加载默认显示的泵类图片 */
+ensureProductGallery('pumps');
+
+/* 其他分类点击后再加载 */
+initApplications();
+initTabs();
+initReveal();
+initCounters();
   </script>
 </body>
 </html>
