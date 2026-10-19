@@ -2,7 +2,7 @@
 
 Three service areas: logistics and roller systems, circuit board fabrication and repair, and chain/belt transmission.
 
-Buildless static website using the layout of protiger.net. Retains the existing VIZK trademark, contact number and WeChat QR code.
+Buildless static website using the layout of protiger.net. Retains the existing VIZK trademark and WeChat QR code.
 
 Production: https://vizk.cn/ from the main branch of protigerLYU/protiger-site3.
 

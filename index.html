@@ -41,8 +41,6 @@
     .brand-lockup sup { font-size:17px; vertical-align:super; letter-spacing:0; }
     .brand-lockup .brand { margin:5px 0 0; color:var(--navy); font-size:12px; font-weight:700; letter-spacing:2px; }
     .header-intro { max-width:960px; margin:0 auto 18px; color:#526985; font-size:15px; line-height:1.9; }
-    .contact { margin:0; color:var(--muted); font-size:14px; }
-    .contact a { display:inline-block; padding:6px 17px; border:1px solid #cfdef5; border-radius:999px; background:#fff; color:var(--blue-deep); font-size:16px; font-weight:700; text-decoration:none; }
 
     .category-nav { position:sticky; top:0; z-index:10; display:flex; justify-content:center; flex-wrap:wrap; gap:6px 12px; padding:13px 20px; border-bottom:3px solid var(--yellow); background:var(--blue); box-shadow:0 5px 18px rgba(22,67,133,.08); }
     .category-nav a { padding:7px 15px; border-radius:7px; color:#fff; font-size:14px; font-weight:700; text-decoration:none; transition:background .18s ease; }
@@ -81,16 +79,12 @@
     .image-note { margin-top:auto; padding:21px 5px 4px; color:var(--muted); font-size:12px; }
     .image-note b { display:block; margin-bottom:6px; color:var(--blue-deep); font-size:13px; }
     .image-note p { margin-bottom:8px; }
-    .image-note a { color:var(--blue); font-size:17px; font-weight:700; white-space:nowrap; text-decoration:none; }
 
     .service { position:relative; margin-bottom:24px; padding:30px 34px; border-top:4px solid var(--orange); border-radius:14px; background:linear-gradient(115deg,#123b80,#165fd6); box-shadow:0 10px 30px rgba(22,67,133,.12); }
     .service-contact { display:grid; grid-template-columns:minmax(0,1fr) 160px; gap:32px; align-items:center; }
     .service h2 { margin-bottom:13px; color:#fff; font-size:23px; }
     .service p { margin-bottom:12px; color:#e2ecff; font-size:14px; }
     .service .service-steps { margin:16px 0 20px; color:#fff2b6; font-size:13px; }
-    .service-contact > div > a { display:inline-block; padding:10px 20px; border-radius:7px; background:var(--orange); color:#152f55; font-size:15px; font-weight:700; text-decoration:none; }
-    .service-contact > div > a:hover { background:#ffa34d; }
-    .service a:focus-visible { outline-color:var(--yellow); }
     .wechat { text-align:center; }
     .wechat img { display:block; width:144px; height:144px; margin:auto; padding:7px; border:2px solid #ffdb67; border-radius:10px; background:#fff; object-fit:contain; }
     .wechat figcaption { padding:10px 0 0; border:0; color:#fff; font-size:11px; font-weight:400; }
@@ -132,11 +126,10 @@
     @media (max-width:480px) {
       .image-stack { grid-template-columns:1fr; }
       .category-label { font-size:9px; letter-spacing:.5px; }
-      .service-contact > div > a { width:100%; text-align:center; }
     }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .category-nav a { transition:none; } }
   </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"VIZK","url":"https://vizk.cn/","logo":"https://vizk.cn/VIZK.jpg","telephone":"+86-18251832484","description":"物流线与辊筒系统、电路板制作与维修、链条链轮与皮带带轮配套及非标定制。"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"VIZK","url":"https://vizk.cn/","logo":"https://vizk.cn/VIZK.jpg","description":"物流线与辊筒系统、电路板制作与维修、链条链轮与皮带带轮配套及非标定制。"}</script>
 </head>
 <body id="top">
   <a class="skip-link" href="#products">跳转到产品目录</a>
@@ -146,7 +139,6 @@
       <div><h1>VIZK<sup>®</sup></h1><p class="brand">工业设备备件与定制配套</p></div>
     </div>
     <p class="header-intro">专注物流线与辊筒系统、电路板制作与维修、链条链轮与皮带带轮。面向设备维护、生产线配套和改造需求，提供产品选配、故障检修与按图按样非标定制服务。</p>
-    <p class="contact">产品咨询：<a href="tel:18251832484">182 5183 2484</a></p>
   </div></header>
   <nav class="category-nav" aria-label="产品分类"><a href="#logistics">物流线与辊筒系统</a><a href="#circuit-boards">电路板制作与维修</a><a href="#chains-belts">链条链轮与皮带带轮</a><a href="#custom">非标定制与咨询</a></nav>
   <main id="products">
@@ -168,7 +160,7 @@
           <figure><img src="images/catalog/motorized-rollers.jpg" alt="电动辊筒与驱动配套" width="800" height="640" loading="lazy" decoding="async"><figcaption>电动辊筒与驱动配套</figcaption></figure>
           <figure><img src="images/catalog/power-base-rack-jack.webp" alt="Power Base 与齿条同步升降组件示意图" width="880" height="660" loading="lazy" decoding="async"><figcaption>Power Base 与齿条同步升降组件</figcaption></figure>
         </div>
-        <div class="image-note"><b>配套咨询</b><p>提供设备工况、图纸、样件或故障现象，沟通适合的配套方案。</p><a href="tel:18251832484">182 5183 2484</a></div>
+        <div class="image-note"><b>配套咨询</b><p>提供设备工况、图纸、样件或故障现象，沟通适合的配套方案。</p></div>
       </aside>
     </section>
 
@@ -187,7 +179,7 @@
           <figure><img src="images/catalog/board-testing.webp" alt="电路板制作与检测配套" width="1440" height="1080" loading="lazy" decoding="async"><figcaption>电路板制作与检测配套</figcaption></figure>
           <figure><img src="images/catalog/board-repair.webp" alt="工业电路板维修" width="1440" height="1080" loading="lazy" decoding="async"><figcaption>工业电路板维修</figcaption></figure>
         </div>
-        <div class="image-note"><b>配套咨询</b><p>提供设备工况、图纸、样件或故障现象，沟通适合的配套方案。</p><a href="tel:18251832484">182 5183 2484</a></div>
+        <div class="image-note"><b>配套咨询</b><p>提供设备工况、图纸、样件或故障现象，沟通适合的配套方案。</p></div>
       </aside>
     </section>
 
@@ -206,7 +198,7 @@
           <figure><img src="images/catalog/chains-sprockets.jpg" alt="链条与链轮配套" width="1024" height="819" loading="lazy" decoding="async"><figcaption>链条与链轮配套</figcaption></figure>
           <figure><img src="images/catalog/timing-pulleys-belts.webp" alt="同步轮与同步齿形带品类示意" width="880" height="660" loading="lazy" decoding="async"><figcaption>同步轮与同步齿形带</figcaption></figure>
         </div>
-        <div class="image-note"><b>配套咨询</b><p>提供设备工况、图纸、样件或故障现象，沟通适合的配套方案。</p><a href="tel:18251832484">182 5183 2484</a></div>
+        <div class="image-note"><b>配套咨询</b><p>提供设备工况、图纸、样件或故障现象，沟通适合的配套方案。</p></div>
       </aside>
     </section>
     <section class="service" id="custom" aria-labelledby="service-title">
@@ -215,7 +207,6 @@
           <h2 id="service-title">产品配套与非标定制</h2>
           <p>VIZK 围绕使用工况、安装接口和维护需求提供配套服务。机械产品支持按图按样、旧件测绘与结构适配；电路板项目可结合设计资料、板卡实物及测试条件，确认制作、检测与维修方案。</p>
           <p class="service-steps">需求沟通 → 参数与资料核对 → 方案确认 → 制作或维修 → 验证交付</p>
-          <a href="tel:18251832484">电话咨询：182 5183 2484</a>
         </div>
         <figure class="wechat"><img src="images/wechat.jpg" alt="VIZK 微信二维码" width="144" height="144" loading="lazy" decoding="async"><figcaption>微信咨询产品与定制需求</figcaption></figure>
       </div>
